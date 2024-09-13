@@ -20,7 +20,8 @@ namespace AgendaApi.Controllers
         {
             try
             {
-                return Ok(_service.Save(pessoa));
+                //return Ok(_service.Save(pessoa));
+                return StatusCode(201,_service.Save(pessoa));
             }
             catch (Exception ex) { 
                return BadRequest(ex.Message);
@@ -28,41 +29,50 @@ namespace AgendaApi.Controllers
             
         }
 
-        /* [HttpGet]
+        [HttpGet]
          public IActionResult Get()
          {
-             return Ok(_repo.GetAll());
+             return Ok(_service.GetAll());
          }
 
-         [HttpGet("/{id}")]
-         public IActionResult Get(int id)
-         {
-             return Ok(_repo.Get(id));
-         }
+        [HttpDelete("/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _service.Delete(id);
+                return NoContent();
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpGet("/{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                return StatusCode(200, _service.Get(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-
-         [HttpPut("/{id}")]
-         public IActionResult Put(int id, [FromBody] Pessoa pessoa)
-         {
-             var pessoaExiste = _repo.Get(id);
-             if (pessoaExiste == null) {
-                 return StatusCode(404, "Pessoa não encontrada");
-             }
-             _repo.Update(pessoa);
-             return StatusCode(200, "Pessoa alterada com sucesso");
-         }
-
-         [HttpDelete("/{id}")]
-         public IActionResult Delete(int id)
-         {
-             var pessoaExiste = _repo.Get(id);
-             if (pessoaExiste == null)
-             {
-                 return StatusCode(404, "Pessoa não encontrada");
-             }
-             _repo.Delete(id);
-             return StatusCode(200, "Pessoa alterada com sucesso");
-         }*/
+        [HttpPut("/{id}")]
+        public IActionResult Put(int id, [FromBody] Pessoa pessoa)
+        {
+            try
+            {
+                _service.Update(pessoa);
+                return StatusCode(200, "Pessoa alterada com sucesso" );
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

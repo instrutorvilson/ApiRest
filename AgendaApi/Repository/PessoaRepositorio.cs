@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 
 namespace AgendaApi.Repository
 {
-    public class RepoPessoa : IRepository<Pessoa, int>
+    public class PessoaRepositorio : IRepository<Pessoa, int>
     {
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=agenda;Integrated Security = True";
 
@@ -108,14 +108,14 @@ namespace AgendaApi.Repository
                 {
                     connection.Open();
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
-                    return entity;
+                    
                 }
                 catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
             }
-            return null;
+            return entity;
         }
 
         public void Update(Pessoa entity)

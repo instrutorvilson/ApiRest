@@ -14,7 +14,7 @@ namespace AgendaApi
             
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<RepoPessoa>();
+            builder.Services.AddSingleton<PessoaRepositorio>();
             builder.Services.AddSingleton<PessoaService>();
 
             var app = builder.Build();
