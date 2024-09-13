@@ -1,4 +1,0 @@
-Fazer a api acessar o banco de dados
-1 - Criar interface com assinatura dos métodos CRUD
-2 - Criar classe repositorio que implementa a interface
-3 - usar tratamento de exceção
